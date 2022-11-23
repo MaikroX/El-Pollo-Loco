@@ -13,8 +13,20 @@ class Coins extends MovableObject {
   }
 
   animate() {
+    this.collectThisCoin();
+
     setInterval(() => {
       this.playAnimation(this.IMAGES_COIN);
     }, 200);
+    this.collectThisCoin();
+  }
+
+  // Muss evtl. mit Timestamp gearbeitet werden //
+  // Muss evtl. mit Timestamp gearbeitet werden //
+  // Muss evtl. mit Timestamp gearbeitet werden //
+  collectThisCoin() {
+    if (this.collectCoins()) {
+      this.loadImages(this.IMAGES_COIN[0]);
+    }
   }
 }
