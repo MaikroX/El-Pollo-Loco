@@ -17,5 +17,11 @@ class Bottle extends MovableObject {
     setInterval(() => {
       this.playAnimation(this.IMAGES_BOTTLE_GROUND);
     }, 400);
+
+    setInterval(() => {
+      if (this.collectBottle()) {
+        loadImage("img/6_salsa_bottle/1_salsa_bottle_on_ground.png");
+      }
+    }, 60);
   }
 }

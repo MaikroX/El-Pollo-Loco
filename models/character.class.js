@@ -110,10 +110,9 @@ class Character extends MovableObject {
 
   // Jumping Pepe
   jumpAnimation() {
-    let jump = setInterval(() => {
+    setInterval(() => {
       if (this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING);
-        // console.log("Jump ID", jump);
       }
     }, 160);
     this.stayHere();
@@ -145,7 +144,7 @@ class Character extends MovableObject {
 
   //hurt Animation
   hurtAnimation() {
-    let hurt = setInterval(() => {
+    setInterval(() => {
       if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
         // console.log("interval HURT ID", hurt);

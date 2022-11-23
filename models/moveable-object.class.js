@@ -4,6 +4,8 @@ class MovableObject extends DrawableObject {
   speedY = 0;
   acceleration = 1;
   energy = 100;
+  bottle = 0;
+  coins = 0;
   lastHit = 0;
 
   applyGravity() {
@@ -33,6 +35,22 @@ class MovableObject extends DrawableObject {
     );
   }
 
+  //Coins collect
+  collectCoins() {
+    if (this.coins < 100) {
+      this.coins += 20;
+    }
+  }
+
+  // bottle collect
+  collectBottle() {
+    if (this.bottle < 100) {
+      this.bottle += 20;
+    }
+    // else {
+    //   this.lastHit = new Date().getTime();
+    // }
+  }
   hit() {
     this.energy -= 5;
     if (this.energy < 0) {
