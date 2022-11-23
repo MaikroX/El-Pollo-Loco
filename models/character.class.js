@@ -3,6 +3,7 @@ class Character extends MovableObject {
   width = 120;
   y = 50;
   speed = 5;
+  deadIntervalId = [];
 
   IMAGES_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
@@ -42,6 +43,19 @@ class Character extends MovableObject {
     "img/2_character_pepe/4_hurt/H-41.png",
   ];
 
+  IMAGES_IDLE = [
+    "img/2_character_pepe/1_idle/idle/I-1.png",
+    "img/2_character_pepe/1_idle/idle/I-2.png",
+    "img/2_character_pepe/1_idle/idle/I-3.png",
+    "img/2_character_pepe/1_idle/idle/I-4.png",
+    "img/2_character_pepe/1_idle/idle/I-5.png",
+    "img/2_character_pepe/1_idle/idle/I-6.png",
+    "img/2_character_pepe/1_idle/idle/I-7.png",
+    "img/2_character_pepe/1_idle/idle/I-8.png",
+    "img/2_character_pepe/1_idle/idle/I-9.png",
+    "img/2_character_pepe/1_idle/idle/I-10.png",
+  ];
+
   world;
   walking_sound = new Audio("audio/walk.mp3");
 
@@ -51,6 +65,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_JUMPING);
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.IMAGES_IDLE);
     this.applyGravity();
     this.animate();
   }
@@ -70,7 +85,7 @@ class Character extends MovableObject {
         this.moveRight();
         this.playFootSounds();
       }
-      if (this.world.keyboard.LEFT && this.x > 0) {
+      if (this.world.keyboard.LEFT && this.x > -600) {
         this.moveLeft();
         this.playFootSounds();
       }
@@ -98,17 +113,23 @@ class Character extends MovableObject {
     let jump = setInterval(() => {
       if (this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING);
-        console.log("Jump ID", jump);
+        // console.log("Jump ID", jump);
       }
     }, 160);
+    this.stayHere();
+  }
+
+  stayHere() {
+    if (!this.isAboveGround) {
+      this.IMAGES_IDLE[0];
+    }
   }
 
   // Pepe Dead Animation
-  deadAnimation(killed) {
+  deadAnimation() {
     this.playAnimation(this.IMAGES_DEAD);
-    console.log("killed ID", killed);
     setTimeout(function () {
-      clearInterval(24);
+      world.character.deadIntervalId.forEach(clearInterval);
     }, 620);
   }
 
@@ -116,7 +137,8 @@ class Character extends MovableObject {
   pepeIsDown() {
     let killed = setInterval(() => {
       if (this.isDead()) {
-        this.deadAnimation(killed);
+        this.deadIntervalId.push(killed);
+        this.deadAnimation();
       }
     }, 200);
   }
@@ -126,7 +148,7 @@ class Character extends MovableObject {
     let hurt = setInterval(() => {
       if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
-        console.log("interval HURT ID", hurt);
+        // console.log("interval HURT ID", hurt);
       }
     }, 60);
   }

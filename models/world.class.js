@@ -62,6 +62,7 @@ class World {
     this.addToMap(this.character);
     this.addObjectsToMap(this.throwableObject);
     this.addObjectsToMap(this.level.coins);
+    this.addObjectsToMap(this.level.bottle);
 
     // Zeichnet Statusbar
     // --- Space for fixed Objects ---
