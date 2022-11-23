@@ -4,7 +4,7 @@ class MovableObject extends DrawableObject {
   speedY = 0;
   acceleration = 1;
   energy = 100;
-  lastHIt = 0;
+  lastHit = 0;
 
   applyGravity() {
     setInterval(() => {
