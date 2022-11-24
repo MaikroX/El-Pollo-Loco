@@ -24,6 +24,9 @@ class Coins extends MovableObject {
   // Muss evtl. mit Timestamp gearbeitet werden //
   // Muss evtl. mit Timestamp gearbeitet werden //
   // Muss evtl. mit Timestamp gearbeitet werden //
+
+  // For Schleife Zugriff auf --- world.level.coins[i] ---
+
   collectThisCoin() {
     if (this.collectCoins()) {
       this.loadImages(this.IMAGES_COIN[0]);
