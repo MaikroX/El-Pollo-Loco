@@ -4,6 +4,7 @@ class Character extends MovableObject {
   y = 50;
   speed = 5;
   deadIntervalId = [];
+  sleep;
 
   IMAGES_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
@@ -56,6 +57,19 @@ class Character extends MovableObject {
     "img/2_character_pepe/1_idle/idle/I-10.png",
   ];
 
+  IMAGES_LONG_IDLE = [
+    "img/2_character_pepe/1_idle/long_idle/I-11.png",
+    "img/2_character_pepe/1_idle/long_idle/I-12.png",
+    "img/2_character_pepe/1_idle/long_idle/I-13.png",
+    "img/2_character_pepe/1_idle/long_idle/I-14.png",
+    "img/2_character_pepe/1_idle/long_idle/I-15.png",
+    "img/2_character_pepe/1_idle/long_idle/I-16.png",
+    "img/2_character_pepe/1_idle/long_idle/I-17.png",
+    "img/2_character_pepe/1_idle/long_idle/I-18.png",
+    "img/2_character_pepe/1_idle/long_idle/I-19.png",
+    "img/2_character_pepe/1_idle/long_idle/I-20.png",
+  ];
+
   world;
   walking_sound = new Audio("audio/walk.mp3");
 
@@ -66,6 +80,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_IDLE);
+    this.loadImages(this.IMAGES_LONG_IDLE);
     this.applyGravity();
     this.animate();
   }
@@ -76,6 +91,8 @@ class Character extends MovableObject {
     this.hurtAnimation();
     this.pepeIsDown();
     this.moveCharacter();
+    this.pepeNotMoving();
+    // this.pepeRest();
   }
 
   moveCharacter() {
@@ -104,6 +121,7 @@ class Character extends MovableObject {
         (this.world.keyboard.LEFT && !this.isAboveGround())
       ) {
         this.playAnimation(this.IMAGES_WALKING);
+        this.sleep = false;
       }
     }, 60);
   }
@@ -151,6 +169,29 @@ class Character extends MovableObject {
       }
     }, 60);
   }
+
+  //Pepe stand on the Gorund
+  pepeNotMoving() {
+    setInterval(() => {
+      if ((this.sleep = !true)) {
+        console.log("Go to Sleep");
+      } else {
+        if (!this.isAboveGround()) {
+          this.playAnimation(this.IMAGES_IDLE);
+        }
+      }
+    }, 200);
+  }
+
+  // // Pepe ist resting & falls to sleep
+  // pepeRest() {
+  //   setInterval(() => {
+  //     if (!this.isAboveGround()) {
+  //       this.playAnimation(this.IMAGES_LONG_IDLE);
+  //       this.sleep = !true;
+  //     }
+  //   }, 2000);
+  // }
 
   // play step Sound only on Ground
   playFootSounds() {
