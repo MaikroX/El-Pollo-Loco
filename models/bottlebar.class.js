@@ -12,7 +12,7 @@ class Bottlebar extends DrawableObject {
 
   constructor() {
     super().loadImage(
-      "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png"
+      "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png"
     );
     this.loadImages(this.IMAGES_BOTTLE);
     this.x = 255;
