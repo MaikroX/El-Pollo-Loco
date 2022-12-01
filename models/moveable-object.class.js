@@ -4,6 +4,7 @@ class MovableObject extends DrawableObject {
   speedY = 0;
   acceleration = 1;
   energy = 100;
+  chickenEnergy = 100;
   bottle = 0;
   coins = 0;
   lastHit = 0;
@@ -51,12 +52,20 @@ class MovableObject extends DrawableObject {
     //   this.lastHit = new Date().getTime();
     // }
   }
+
   hit() {
     this.energy -= 5;
     if (this.energy < 0) {
       this.energy = 0;
     } else {
       this.lastHit = new Date().getTime();
+    }
+  }
+
+  chickenHit() {
+    this.chickenEnergy -= 100;
+    if (this.chickenEnergy < 0) {
+      this.chickenEnergy = 0;
     }
   }
 
@@ -80,6 +89,7 @@ class MovableObject extends DrawableObject {
     this.otherDirection = true;
   }
 
+  //If Chicken alive
   chickenWalk() {
     this.x -= this.speed;
   }

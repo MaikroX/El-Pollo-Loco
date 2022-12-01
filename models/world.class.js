@@ -22,19 +22,18 @@ class World {
 
   run() {
     setInterval(() => {
-      this.checkThrowObject();
       this.checkCollisions();
       this.checkCollectionBottles();
       this.checkCollectionCoins();
-      // this.checkBottleHit();
       this.coinIsCollected();
-      this.bottleIsCollected();
+      this.checkThrowObject();
     }, 250);
   }
 
   checkCollectionBottles() {
     this.level.bottle.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
+        this.bottleIsCollected();
         this.character.collectBottle();
         this.collectedBottle = this.collectedBottle.splice(0, 4);
         this.collectedBottle.push(bottle);
@@ -42,6 +41,20 @@ class World {
         console.log("Collect Bottle", this.character.bottle);
       }
     });
+    if (this.bottleBar.percentage == 100) {
+    }
+  }
+
+  //Collect the Bottle an move it off screen
+  bottleIsCollected() {
+    if (this.collectedBottle.length < 5) {
+      for (let i = 0; i < this.level.bottle.length; i++) {
+        const bottle = this.level.bottle[i];
+        if (this.character.isColliding(bottle)) {
+          this.level.bottle.splice(i, 1);
+        }
+      }
+    }
   }
 
   // When bottle count is over 0 then able to throw a bottle
@@ -75,16 +88,6 @@ class World {
       const coin = this.level.coins[i];
       if (this.character.isColliding(coin)) {
         this.level.coins.splice(i, 1);
-      }
-    }
-  }
-
-  //Collect the Bottle an move it off screen
-  bottleIsCollected() {
-    for (let i = 0; i < this.level.bottle.length; i++) {
-      const bottle = this.level.bottle[i];
-      if (this.character.isColliding(bottle)) {
-        this.level.bottle.splice(i, 1);
       }
     }
   }

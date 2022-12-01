@@ -4,7 +4,6 @@ class Character extends MovableObject {
   y = 50;
   speed = 5;
   deadIntervalId = [];
-  sleep;
 
   IMAGES_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
@@ -86,13 +85,13 @@ class Character extends MovableObject {
   }
 
   animate() {
+    // this.pepeRest();
+    this.pepeNotMoving();
     this.walkAnimation();
     this.jumpAnimation();
     this.hurtAnimation();
     this.pepeIsDown();
     this.moveCharacter();
-    this.pepeNotMoving();
-    // this.pepeRest();
   }
 
   moveCharacter() {
@@ -121,9 +120,8 @@ class Character extends MovableObject {
         (this.world.keyboard.LEFT && !this.isAboveGround())
       ) {
         this.playAnimation(this.IMAGES_WALKING);
-        this.sleep = false;
       }
-    }, 60);
+    }, 100);
   }
 
   // Jumping Pepe
@@ -173,25 +171,18 @@ class Character extends MovableObject {
   //Pepe stand on the Gorund
   pepeNotMoving() {
     setInterval(() => {
-      if ((this.sleep = !true)) {
-        console.log("Go to Sleep");
-      } else {
-        if (!this.isAboveGround()) {
-          this.playAnimation(this.IMAGES_IDLE);
-        }
-      }
-    }, 200);
+      this.playAnimation(this.IMAGES_IDLE);
+    }, 300);
   }
 
-  // // Pepe ist resting & falls to sleep
-  // pepeRest() {
-  //   setInterval(() => {
-  //     if (!this.isAboveGround()) {
-  //       this.playAnimation(this.IMAGES_LONG_IDLE);
-  //       this.sleep = !true;
-  //     }
-  //   }, 2000);
-  // }
+  // Pepe ist resting & falls to sleep
+  pepeRest() {
+    setTimeout(() => {
+      setInterval(() => {
+        this.playAnimation(this.IMAGES_LONG_IDLE);
+      }, 300);
+    }, 1500);
+  }
 
   // play step Sound only on Ground
   playFootSounds() {
