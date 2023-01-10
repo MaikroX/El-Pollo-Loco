@@ -4,6 +4,12 @@ class Character extends MovableObject {
   y = 50;
   speed = 5;
   deadIntervalId = [];
+  offset = {
+    top: 120,
+    bottom: 30,
+    left: 40,
+    right: 40,
+  };
 
   IMAGES_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
@@ -85,13 +91,28 @@ class Character extends MovableObject {
   }
 
   animate() {
-    // this.pepeRest();
-    this.pepeNotMoving();
-    this.walkAnimation();
-    this.jumpAnimation();
-    this.hurtAnimation();
-    this.pepeIsDown();
+    // this.walkAnimation();
+    // this.jumpAnimation();
+    // this.pepeNotMoving();
+    // this.hurtAnimation();
+    // this.pepeNotMoving();
+    // this.pepeIsDown();
     this.moveCharacter();
+
+    setInterval(() => {
+      //walk Animation
+      if (this.isDead()) {
+        this.playAnimation(this.IMAGES_DEAD);
+      } else if (this.isHurt()) {
+        this.playAnimation(this.IMAGES_HURT);
+      } else if (this.isAboveGround()) {
+        this.playAnimation(this.IMAGES_JUMPING);
+      } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        this.playAnimation(this.IMAGES_WALKING);
+      } else {
+        this.playAnimation(this.IMAGES_IDLE);
+      }
+    }, 120);
   }
 
   moveCharacter() {
@@ -110,78 +131,6 @@ class Character extends MovableObject {
       }
       this.world.camera_x = -this.x + 80;
     }, 1000 / 60);
-  }
-
-  // Pepe ist walking Animation
-  walkAnimation() {
-    setInterval(() => {
-      if (
-        (this.world.keyboard.RIGHT && !this.isAboveGround()) ||
-        (this.world.keyboard.LEFT && !this.isAboveGround())
-      ) {
-        this.playAnimation(this.IMAGES_WALKING);
-      }
-    }, 100);
-  }
-
-  // Jumping Pepe
-  jumpAnimation() {
-    setInterval(() => {
-      if (this.isAboveGround()) {
-        this.playAnimation(this.IMAGES_JUMPING);
-      }
-    }, 160);
-    this.stayHere();
-  }
-
-  stayHere() {
-    if (!this.isAboveGround) {
-      this.IMAGES_IDLE[0];
-    }
-  }
-
-  // Pepe Dead Animation
-  deadAnimation() {
-    this.playAnimation(this.IMAGES_DEAD);
-    setTimeout(function () {
-      world.character.deadIntervalId.forEach(clearInterval);
-    }, 620);
-  }
-
-  // Pepes last dance
-  pepeIsDown() {
-    let killed = setInterval(() => {
-      if (this.isDead()) {
-        this.deadIntervalId.push(killed);
-        this.deadAnimation();
-      }
-    }, 200);
-  }
-
-  //hurt Animation
-  hurtAnimation() {
-    setInterval(() => {
-      if (this.isHurt()) {
-        this.playAnimation(this.IMAGES_HURT);
-        // console.log("interval HURT ID", hurt);
-      }
-    }, 60);
-  }
-
-  //Pepe stand on the Gorund
-  pepeNotMoving() {
-    setInterval(() => {
-      this.playAnimation(this.IMAGES_IDLE);
-    }, 300);
-  }
-
-  // Pepe ist resting & falls to sleep
-  pepeRest() {
-    setTimeout(() => {
-      setInterval(() => {
-        this.playAnimation(this.IMAGES_LONG_IDLE);
-      }, 300);
-    }, 1500);
   }
 
   // play step Sound only on Ground

@@ -1,6 +1,12 @@
 class Bottle extends MovableObject {
   height = 80;
   y = 352;
+  offset = {
+    top: 15,
+    bottom: 0,
+    left: 50,
+    right: 40,
+  };
   IMAGES_BOTTLE_GROUND = ["img/6_salsa_bottle/1_salsa_bottle_on_ground.png"];
 
   constructor() {

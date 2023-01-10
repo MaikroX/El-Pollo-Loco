@@ -4,10 +4,18 @@ class MovableObject extends DrawableObject {
   speedY = 0;
   acceleration = 1;
   energy = 100;
-  chickenEnergy = 100;
   bottle = 0;
   coins = 0;
   lastHit = 0;
+  lastChickenHit = 0;
+  lastBossHit = 0;
+  sleep = false;
+  offset = {
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  };
 
   applyGravity() {
     setInterval(() => {
@@ -26,13 +34,12 @@ class MovableObject extends DrawableObject {
     }
   }
 
-  // is character.isColliding(chicken)
   isColliding(mo) {
     return (
-      this.x + this.width > mo.x &&
-      this.y + this.height > mo.y &&
-      this.x < mo.x &&
-      this.y < mo.y + mo.height
+      this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+      this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+      this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+      this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
     );
   }
 
@@ -48,9 +55,6 @@ class MovableObject extends DrawableObject {
     if (this.bottle < 100) {
       this.bottle += 20;
     }
-    // else {
-    //   this.lastHit = new Date().getTime();
-    // }
   }
 
   hit() {
@@ -63,16 +67,30 @@ class MovableObject extends DrawableObject {
   }
 
   chickenHit() {
+    this.smallChickenEnergy -= 100;
     this.chickenEnergy -= 100;
-    if (this.chickenEnergy < 0) {
+    if (this.chickenEnergy <= 0) {
       this.chickenEnergy = 0;
     }
   }
 
+  endbossHit() {
+    if (!this.canHit) return;
+    if (this.endBossEnergy <= 0) {
+      this.endBossEnergy = 0;
+    } else {
+      this.endBossEnergy -= 50;
+    }
+    this.canHit = false;
+    setTimeout(() => {
+      this.canHit = true;
+    }, 1500);
+  }
+
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit; // Differenz in ms
-    timepassed = timepassed / 1000; //diefference in s
-    return timepassed < 0.35;
+    timepassed = timepassed / 1500; //diefference in s
+    return timepassed < 0.95;
   }
 
   isDead() {
@@ -82,16 +100,28 @@ class MovableObject extends DrawableObject {
   moveRight() {
     this.x += this.speed;
     this.otherDirection = false;
+    this.sleep = false;
   }
 
   moveLeft() {
     this.x -= this.speed;
     this.otherDirection = true;
+    this.sleep = false;
+  }
+
+  fallInSleep() {
+    this.sleep = true;
   }
 
   //If Chicken alive
   chickenWalk() {
     this.x -= this.speed;
+  }
+
+  bossWalk() {
+    if (this.seen == true) {
+      this.x -= 0.85;
+    }
   }
 
   playAnimation(images) {
@@ -103,6 +133,10 @@ class MovableObject extends DrawableObject {
 
   jump() {
     this.speedY = 18;
+  }
+
+  jumpAfterKill() {
+    this.speedY = 8;
   }
 
   stayGround() {
