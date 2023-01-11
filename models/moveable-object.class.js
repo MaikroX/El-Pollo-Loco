@@ -16,6 +16,9 @@ class MovableObject extends DrawableObject {
     left: 0,
     right: 0,
   };
+  chickenEnergy = 50;
+  smallChickenEnergy = 50;
+  splash = false;
 
   applyGravity() {
     setInterval(() => {
@@ -35,6 +38,15 @@ class MovableObject extends DrawableObject {
   }
 
   isColliding(mo) {
+    return (
+      this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+      this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+      this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+      this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
+    );
+  }
+
+  isCollidingChickenTop(mo) {
     return (
       this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
       this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
@@ -67,8 +79,8 @@ class MovableObject extends DrawableObject {
   }
 
   chickenHit() {
-    this.smallChickenEnergy -= 100;
-    this.chickenEnergy -= 100;
+    this.smallChickenEnergy -= 50;
+    this.chickenEnergy -= 50;
     if (this.chickenEnergy <= 0) {
       this.chickenEnergy = 0;
     }
@@ -119,9 +131,7 @@ class MovableObject extends DrawableObject {
   }
 
   bossWalk() {
-    if (this.seen == true) {
-      this.x -= 0.85;
-    }
+    this.x -= 1.2;
   }
 
   playAnimation(images) {
@@ -136,7 +146,7 @@ class MovableObject extends DrawableObject {
   }
 
   jumpAfterKill() {
-    this.speedY = 8;
+    this.speedY = 7;
   }
 
   stayGround() {

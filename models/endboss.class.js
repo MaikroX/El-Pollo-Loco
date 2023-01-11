@@ -2,9 +2,17 @@ class Endboss extends MovableObject {
   height = 400;
   width = 250;
   y = 50;
-  hurtIntervall = [];
+  hurtInterval = [];
+  altertInterval = [];
+  walkInterval = [];
   canHit = true;
   endBossEnergy = 150;
+  offset = {
+    top: 30,
+    bottom: 0,
+    left: 15,
+    right: 0,
+  };
 
   IMAGES_WALK = [
     "img/4_enemie_boss_chicken/1_walk/G1.png",
@@ -42,7 +50,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_WALK);
-    this.x = 2400; // 2600 soll er starten
+    this.x = 1000; // 2600 soll er starten
     this.animate();
   }
 
@@ -57,50 +65,59 @@ class Endboss extends MovableObject {
 
   bossMove() {
     setInterval(() => {
-      this.bossWalk();
-    }, 1100 / 60);
+      if (this.endBossEnergy >= 1) {
+        this.bossWalk();
+      }
+    }, 1000 / 60);
   }
 
   bossWalkAnimation() {
     setInterval(() => {
-      this.playAnimation(this.IMAGES_WALK);
+      if (this.endBossEnergy >= 1) {
+        this.playAnimation(this.IMAGES_WALK);
+      }
     }, 300);
   }
 
   alertAnimation() {
-    setInterval(() => {
+    let altertInterval = setInterval(() => {
       this.playAnimation(this.IMAGES_ALERT);
+      setTimeout(() => {
+        clearInterval(altertInterval);
+      }, 700);
     }, 300);
+    this.loadImage("img/4_enemie_boss_chicken/5_dead/G26.png");
   }
 
   firstHitAnimation() {
-    let hurtIntervall = setInterval(() => {
+    let hurtInterval = setInterval(() => {
       if (this.endBossEnergy == 100) {
         this.playAnimation(this.IMAGES_HURT);
         setTimeout(() => {
-          clearInterval(hurtIntervall);
+          clearInterval(hurtInterval);
         }, 700);
       }
     }, 150);
   }
 
   secondHitAnimation() {
-    let hurtIntervall = setInterval(() => {
+    let hurtInterval = setInterval(() => {
       if (this.endBossEnergy == 50) {
         this.playAnimation(this.IMAGES_HURT);
         setTimeout(() => {
-          clearInterval(hurtIntervall);
+          clearInterval(hurtInterval);
         }, 700);
       }
     }, 150);
   }
 
   deadAnimation() {
-    let hurtIntervall = setInterval(() => {
+    let hurtInterval = setInterval(() => {
       if (this.endBossEnergy == 0) {
+        this.speed = 0;
         this.playAnimation(this.IMAGES_DEAD);
         setTimeout(() => {
-          clearInterval(hurtIntervall);
+          clearInterval(hurtInterval);
         }, 300);
       }
     }, 150);

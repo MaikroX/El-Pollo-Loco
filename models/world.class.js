@@ -10,7 +10,6 @@ class World {
   bottleBar = new Bottlebar();
   throwableObject = [];
   collectedBottle = [];
-  seen = false;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -23,25 +22,27 @@ class World {
 
   run() {
     setInterval(() => {
-      this.checkCollisions();
+      this.checkFromWhereColiding();
+      // this.checkCollisions();
+      // this.hitChickenfromTop();
       this.checkBottleHit();
       this.checkCollectionBottles();
       this.checkCollectionCoins();
       this.coinIsCollected();
       this.checkThrowObject();
       this.checkEndbossHit();
-      this.checkIfBossSeePepe();
-      this.hitChickenfromTop();
+      this.checkSplashorNot();
+      // this.checkIfBossSeePepe();
     }, 150);
   }
 
-  checkIfBossSeePepe() {
-    if (this.character.x >= 2000) {
-      console.log("HIer bin ich");
-      this.seen = true;
-    }
-    console.log(this.seen);
-  }
+  // checkIfBossSeePepe() {
+  //   if (this.character.x >= 2000) {
+  //     this.character.seen = true;
+  //     this.bossWalk();
+  //   }
+  //   console.log("Hier bin ich :" + ` ` + this.character.seen);
+  // }
 
   checkCollectionBottles() {
     this.level.bottle.forEach((bottle) => {
@@ -72,7 +73,10 @@ class World {
 
   // When bottle count is over 0 then able to throw a bottle
   checkThrowObject() {
-    if (this.keyboard.D && this.collectedBottle.length > 0) {
+    if (
+      (this.keyboard.ENTER && this.collectedBottle.length > 0) ||
+      (this.keyboard.E && this.collectedBottle.length > 0)
+    ) {
       let collectedBottle = new ThrowAbleObject(
         this.character.x + 100,
         this.character.y + 100
@@ -82,14 +86,19 @@ class World {
       this.throwableObject = this.throwableObject.splice(0, 1);
       this.throwableObject.push(collectedBottle);
       this.collectedBottle.splice(0, 1);
+      // HIER MUSS FALSE REIN
     }
   }
 
   checkBottleHit() {
-    this.level.enemies.forEach((enemy) => {
+    this.level.enemies.forEach((enemy, i) => {
       this.throwableObject.forEach((bottle) => {
         if (enemy.isColliding(bottle)) {
           enemy.chickenHit();
+          this.character.splash = true;
+          setTimeout(() => {
+            // this.level.enemies.splice(i, 1);
+          }, 500);
           console.log("Height of Bottle", this.level.enemies.chickenEnergy);
         }
       });
@@ -105,28 +114,40 @@ class World {
     });
   }
 
+  checkFromWhereColiding() {
+    if (this.character.isAboveGround()) {
+      this.hitChickenfromTop();
+    } else {
+      this.checkCollisions();
+    }
+  }
+
   // check collision with enemy
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
-        this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);
-        console.log("Colission with Character", this.character.energy);
+      if (enemy.chickenEnergy == 50) {
+        if (this.character.isColliding(enemy)) {
+          this.character.hit();
+          this.statusBar.setPercentage(this.character.energy);
+          console.log("Colission with Character", this.character.energy);
+        }
       }
     });
   }
 
   hitChickenfromTop() {
-    this.level.enemies.forEach((enemies, i) => {
+    this.level.enemies.forEach((enemies) => {
       if (
         this.character.isColliding(enemies) &&
         this.character.isAboveGround()
       ) {
-        enemies.chickenHit();
-        this.character.jumpAfterKill();
-        setTimeout(() => {
-          this.level.enemies.splice(i, 1);
-        }, 500);
+        if (enemies.chickenEnergy == 50 || enemies.smallChickenEnergy == 50) {
+          enemies.chickenHit();
+          this.character.jumpAfterKill();
+          // setTimeout(() => {
+          //   // this.level.enemies.splice(i, 1);
+          // }, 500);
+        }
       }
     });
   }
@@ -178,6 +199,12 @@ class World {
     requestAnimationFrame(function () {
       self.draw();
     });
+  }
+
+  checkSplashorNot() {
+    setTimeout(() => {
+      this.character.splash = false;
+    }, 50);
   }
 
   addObjectsToMap(objects) {

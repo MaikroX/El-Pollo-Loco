@@ -6,7 +6,7 @@ class Character extends MovableObject {
   deadIntervalId = [];
   offset = {
     top: 120,
-    bottom: 30,
+    bottom: 10,
     left: 40,
     right: 40,
   };
@@ -99,10 +99,13 @@ class Character extends MovableObject {
     // this.pepeIsDown();
     this.moveCharacter();
 
-    setInterval(() => {
+    let intervalId = setInterval(() => {
       //walk Animation
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
+        setTimeout(() => {
+          clearInterval(intervalId);
+        }, 1050);
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.isAboveGround()) {
