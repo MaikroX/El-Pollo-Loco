@@ -14,6 +14,7 @@ class World {
   background_music = new Audio("audio/background-music.mp3");
   coin_collect_sound = new Audio("audio/coin-collect.mp3");
   bottle_collect_sound = new Audio("audio/collect-bottle.mp3");
+  chicken_hit_sound = new Audio("audio/chicken-hit.mp3");
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -151,6 +152,7 @@ class World {
         this.character.isAboveGround()
       ) {
         if (enemies.chickenEnergy == 50 || enemies.smallChickenEnergy == 50) {
+          this.chickenHitSound();
           enemies.chickenHit();
           this.character.jumpAfterKill();
           // setTimeout(() => {
@@ -220,6 +222,12 @@ class World {
     this.bottle_collect_sound.currentTime = 0;
     this.bottle_collect_sound.playbackRate = 0.9;
     this.bottle_collect_sound.play();
+  }
+
+  chickenHitSound() {
+    this.chicken_hit_sound.currentTime = 0;
+    this.chicken_hit_sound.volume = 0.19;
+    this.chicken_hit_sound.play();
   }
 
   checkSplashorNot() {
