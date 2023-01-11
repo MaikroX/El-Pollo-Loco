@@ -109,13 +109,17 @@ class Character extends MovableObject {
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.isAboveGround()) {
+        this.getMoveTimeStamp();
         this.playAnimation(this.IMAGES_JUMPING);
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        this.getMoveTimeStamp();
         this.playAnimation(this.IMAGES_WALKING);
+      } else if (this.fallInSleep()) {
+        this.playAnimation(this.IMAGES_LONG_IDLE);
       } else {
         this.playAnimation(this.IMAGES_IDLE);
       }
-    }, 120);
+    }, 150);
   }
 
   moveCharacter() {

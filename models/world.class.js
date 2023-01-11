@@ -107,9 +107,9 @@ class World {
 
   checkEndbossHit() {
     this.throwableObject.forEach((bottle) => {
-      if (this.level.enemies[5].isColliding(bottle)) {
-        this.level.enemies[5].endbossHit();
-        console.log("Endboss Energy", this.level.enemies[5].endBossEnergy);
+      if (this.level.enemies[7].isColliding(bottle)) {
+        this.level.enemies[7].endbossHit();
+        console.log("Endboss Energy", this.level.enemies[7].endBossEnergy);
       }
     });
   }

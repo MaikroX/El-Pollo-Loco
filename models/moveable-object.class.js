@@ -19,6 +19,7 @@ class MovableObject extends DrawableObject {
   chickenEnergy = 50;
   smallChickenEnergy = 50;
   splash = false;
+  pepeLastMove = 0;
 
   applyGravity() {
     setInterval(() => {
@@ -122,7 +123,9 @@ class MovableObject extends DrawableObject {
   }
 
   fallInSleep() {
-    this.sleep = true;
+    let timepassed = new Date().getTime() - this.pepeLastMove;
+    timepassed = timepassed / 1000;
+    return timepassed > 2.5;
   }
 
   //If Chicken alive
@@ -151,5 +154,8 @@ class MovableObject extends DrawableObject {
 
   stayGround() {
     this.world.keyboard.UP = false;
+  }
+  getMoveTimeStamp() {
+    this.pepeLastMove = new Date().getTime();
   }
 }
