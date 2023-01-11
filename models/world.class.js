@@ -11,6 +11,10 @@ class World {
   throwableObject = [];
   collectedBottle = [];
 
+  background_music = new Audio("audio/background-music.mp3");
+  coin_collect_sound = new Audio("audio/coin-collect.mp3");
+  bottle_collect_sound = new Audio("audio/collect-bottle.mp3");
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -23,8 +27,6 @@ class World {
   run() {
     setInterval(() => {
       this.checkFromWhereColiding();
-      // this.checkCollisions();
-      // this.hitChickenfromTop();
       this.checkBottleHit();
       this.checkCollectionBottles();
       this.checkCollectionCoins();
@@ -34,6 +36,13 @@ class World {
       this.checkSplashorNot();
       // this.checkIfBossSeePepe();
     }, 150);
+    this.backgroundMusic();
+  }
+
+  backgroundMusic() {
+    // this.background_music.currentTime = 0;
+    this.background_music.volume = 0.08;
+    this.background_music.play();
   }
 
   // checkIfBossSeePepe() {
@@ -65,6 +74,7 @@ class World {
       for (let i = 0; i < this.level.bottle.length; i++) {
         const bottle = this.level.bottle[i];
         if (this.character.isColliding(bottle)) {
+          this.bottleCollectSound();
           this.level.bottle.splice(i, 1);
         }
       }
@@ -86,7 +96,6 @@ class World {
       this.throwableObject = this.throwableObject.splice(0, 1);
       this.throwableObject.push(collectedBottle);
       this.collectedBottle.splice(0, 1);
-      // HIER MUSS FALSE REIN
     }
   }
 
@@ -156,6 +165,7 @@ class World {
     this.level.coins.forEach((coins) => {
       if (this.character.isColliding(coins)) {
         this.character.collectCoins();
+        this.coinCollectSound();
         this.coinBar.setPercentage(this.character.coins);
         console.log("Collect Coins", this.character.coins);
       }
@@ -199,6 +209,17 @@ class World {
     requestAnimationFrame(function () {
       self.draw();
     });
+  }
+
+  coinCollectSound() {
+    this.coin_collect_sound.currentTime = 0;
+    this.coin_collect_sound.playbackRate = 1.8;
+    this.coin_collect_sound.play();
+  }
+  bottleCollectSound() {
+    this.bottle_collect_sound.currentTime = 0;
+    this.bottle_collect_sound.playbackRate = 0.9;
+    this.bottle_collect_sound.play();
   }
 
   checkSplashorNot() {

@@ -15,22 +15,12 @@ class Coins extends MovableObject {
     this.y + Math.floor() * 500;
     this.x = 200 + Math.random() * 1600; // Zahl zwischen 200 und 700
     this.loadImages(this.IMAGES_COIN);
-
     this.animate();
   }
 
   animate() {
-    this.collectThisCoin();
-
     setInterval(() => {
       this.playAnimation(this.IMAGES_COIN);
     }, 200);
-    this.collectThisCoin();
-  }
-
-  collectThisCoin() {
-    if (this.collectCoins()) {
-      this.loadImages(this.IMAGES_COIN[0]);
-    }
   }
 }

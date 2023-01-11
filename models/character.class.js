@@ -77,6 +77,9 @@ class Character extends MovableObject {
 
   world;
   walking_sound = new Audio("audio/walk.mp3");
+  jump_sound = new Audio("audio/jump.mp3");
+  sleep_sound = new Audio("audio/pepe-sleep.mp3");
+  hurt_sound = new Audio("audio/pepe-hurt.mp3");
 
   constructor() {
     super().loadImage("img/2_character_pepe/1_idle/idle/I-1.png");
@@ -107,6 +110,7 @@ class Character extends MovableObject {
           clearInterval(intervalId);
         }, 1050);
       } else if (this.isHurt()) {
+        this.hurtSound();
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.isAboveGround()) {
         this.getMoveTimeStamp();
@@ -114,8 +118,9 @@ class Character extends MovableObject {
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.getMoveTimeStamp();
         this.playAnimation(this.IMAGES_WALKING);
-      } else if (this.fallInSleep()) {
+      } else if (this.fallInSleep() && !this.isAboveGround()) {
         this.playAnimation(this.IMAGES_LONG_IDLE);
+        this.sleepSound();
       } else {
         this.playAnimation(this.IMAGES_IDLE);
       }
@@ -125,6 +130,7 @@ class Character extends MovableObject {
   moveCharacter() {
     setInterval(() => {
       this.walking_sound.pause();
+      // this.jump_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
         this.playFootSounds();
@@ -134,6 +140,7 @@ class Character extends MovableObject {
         this.playFootSounds();
       }
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+        this.playJumpSound();
         this.jump();
       }
       this.world.camera_x = -this.x + 80;
@@ -145,5 +152,20 @@ class Character extends MovableObject {
     if (!this.isAboveGround()) {
       this.walking_sound.play();
     }
+  }
+
+  playJumpSound() {
+    this.jump_sound.volume = 0.4;
+    this.jump_sound.play();
+  }
+
+  sleepSound() {
+    this.sleep_sound.volume = 0.3;
+    this.sleep_sound.play();
+  }
+
+  hurtSound() {
+    this.hurt_sound.volume = 0.35;
+    this.hurt_sound.play();
   }
 }

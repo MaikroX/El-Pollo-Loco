@@ -7,6 +7,8 @@ class ThrowAbleObject extends MovableObject {
   };
   intervalId = [];
   splashinterval = [];
+  splash_sound = new Audio("audio/bottle-splash.mp3");
+  bottle_throw = new Audio("audio/throw2.mp3");
 
   IMAGE_BOTTLE_ROTATION = [
     "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
@@ -39,6 +41,7 @@ class ThrowAbleObject extends MovableObject {
   animate() {
     this.throw();
     this.splashBottle();
+    this.throwBottleSound();
     // this.throwAnimation();
     // this.bottleAnimation();
   }
@@ -65,6 +68,7 @@ class ThrowAbleObject extends MovableObject {
 
   throwAnimation() {
     setInterval(() => {
+      this.throwBottleSound();
       this.playAnimation(this.IMAGE_BOTTLE_ROTATION);
     }, 60);
   }
@@ -73,12 +77,29 @@ class ThrowAbleObject extends MovableObject {
     this.splashinterval = setInterval(() => {
       if (this.y >= 300) {
         this.playAnimation(this.IMAGE_BOTTLE_SPLASH);
+        this.soundSplash();
       } else if (world.character.splash == true) {
         this.playAnimation(this.IMAGE_BOTTLE_SPLASH);
+        this.soundSplash();
         setTimeout(() => {
           clearInterval(this.splashinterval);
         }, 460);
       }
     }, 60);
+  }
+
+  soundSplash() {
+    this.splash_sound.volume = 0.5;
+    this.splash_sound.play();
+    setTimeout(() => {
+      this.splash_sound.pause();
+      clearInterval(this.splashinterval);
+    }, 900);
+  }
+
+  throwBottleSound() {
+    this.bottle_throw.volume = 0.3;
+    this.bottle_throw.play();
+    // }
   }
 }
