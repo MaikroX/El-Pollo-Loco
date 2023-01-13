@@ -7,6 +7,7 @@
     <title>El Pollo Loco</title>
 
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="media.css" />
 
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
@@ -38,7 +39,17 @@
       <h1>El Pollo Loco</h1></div>
       <div class="canvas-all">
         <div class="canvas-out">
-          <canvas id="canvas" width="720" height="480"> </canvas>
+          <canvas id="canvas" width="720" height="480"></canvas>
+          <div>
+          <img class="controlls left media-controls" src="/img/0_move_button/left-arrow.png" alt="move-left">
+          <img class="controlls right media-controls" src="/img/0_move_button/right-arrow.png" alt="move-right">
+          <img class="controlls jump media-controls" src="/img/0_move_button/jump-button.png" alt="jump">
+          <img class="controlls fire media-controls" src="/img/0_move_button/fire-button.png" alt="throw-bottle"> 
+          <div onclick="soundOntoggle()">
+          <img id="muteOn" class="controlls mute" src="/img/0_move_button/sound-on.png" alt="no-mute">
+          <img id="muteOff" class="controlls mute d-none" src="/img/0_move_button/sound-off.png" alt="mute">
+        </div>
+        </div>
         </div>
       </div>
     </div>

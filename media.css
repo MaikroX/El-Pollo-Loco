@@ -1,0 +1,10 @@
+@media (min-width: 1000px) {
+  .media-controls {
+    display: none;
+  }
+}
+@media (max-height: 280px) {
+  #canvas {
+    width: 55%;
+  }
+}
