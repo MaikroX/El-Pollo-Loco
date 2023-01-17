@@ -10,12 +10,6 @@ class MovableObject extends DrawableObject {
   lastChickenHit = 0;
   lastBossHit = 0;
   sleep = false;
-  offset = {
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  };
   chickenEnergy = 50;
   smallChickenEnergy = 50;
   splash = false;

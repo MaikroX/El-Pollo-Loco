@@ -2,6 +2,16 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
+var walking_sound = new Audio("audio/walk.mp3");
+var jump_sound = new Audio("audio/jump.mp3");
+
+function muteAudio() {
+  world.character.walking_sound.muted = !walking_sound.muted;
+  world.character.jump_sound.muted = !world.character.jump_sound.muted;
+  // world.character.sleep_sound.muted = !world.character.sleep_sound;
+  // world.character.hurt_sound.muted = !world.character.hurt_sound.muted;
+}
+
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);

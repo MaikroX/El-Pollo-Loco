@@ -79,11 +79,14 @@ class ThrowAbleObject extends MovableObject {
         this.playAnimation(this.IMAGE_BOTTLE_SPLASH);
         this.soundSplash();
       } else if (world.character.splash == true) {
+        // Andere Abfrage der condition wann true wann false
         this.playAnimation(this.IMAGE_BOTTLE_SPLASH);
         this.soundSplash();
         setTimeout(() => {
           clearInterval(this.splashinterval);
-        }, 460);
+        }, 60);
+      } else if (this.y <= 300) {
+        this.playAnimation(this.IMAGE_BOTTLE_ROTATION);
       }
     }, 60);
   }

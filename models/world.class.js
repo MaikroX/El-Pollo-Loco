@@ -34,7 +34,7 @@ class World {
       this.coinIsCollected();
       this.checkThrowObject();
       this.checkEndbossHit();
-      this.checkSplashorNot();
+      // this.checkSplashorNot();
       // this.checkIfBossSeePepe();
     }, 150);
     this.backgroundMusic();
@@ -105,11 +105,11 @@ class World {
       this.throwableObject.forEach((bottle) => {
         if (enemy.isColliding(bottle)) {
           enemy.chickenHit();
-          this.character.splash = true;
+
           setTimeout(() => {
             // this.level.enemies.splice(i, 1);
           }, 500);
-          console.log("Height of Bottle", this.level.enemies.chickenEnergy);
+          console.log("Height of Bottle", this.level.enemies[i].chickenEnergy);
         }
       });
     });
