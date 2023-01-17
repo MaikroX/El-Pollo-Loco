@@ -104,6 +104,10 @@ class MovableObject extends DrawableObject {
     return this.energy == 0;
   }
 
+  bossisDead() {
+    return this.endBossEnergy == 0;
+  }
+
   moveRight() {
     this.x += this.speed;
     this.otherDirection = false;

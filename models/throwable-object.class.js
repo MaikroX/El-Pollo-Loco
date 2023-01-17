@@ -92,8 +92,10 @@ class ThrowAbleObject extends MovableObject {
   }
 
   soundSplash() {
-    this.splash_sound.volume = 0.5;
-    this.splash_sound.play();
+    if (audioMute == false) {
+      this.splash_sound.volume = 0.5;
+      this.splash_sound.play();
+    }
     setTimeout(() => {
       this.splash_sound.pause();
       clearInterval(this.splashinterval);
@@ -101,8 +103,9 @@ class ThrowAbleObject extends MovableObject {
   }
 
   throwBottleSound() {
-    this.bottle_throw.volume = 0.3;
-    this.bottle_throw.play();
-    // }
+    if (audioMute == false) {
+      this.bottle_throw.volume = 0.3;
+      this.bottle_throw.play();
+    }
   }
 }

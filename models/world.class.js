@@ -35,15 +35,18 @@ class World {
       this.checkThrowObject();
       this.checkEndbossHit();
       // this.checkSplashorNot();
-      // this.checkIfBossSeePepe();
+      // this.checkIfBossSeePepe() ;
     }, 150);
-    this.backgroundMusic();
+    if (audioMute == false) {
+      this.backgroundMusic();
+    }
   }
 
   backgroundMusic() {
-    // this.background_music.currentTime = 0;
-    this.background_music.volume = 0.08;
-    this.background_music.play();
+    if (audioMute == false) {
+      this.background_music.volume = 0.08;
+      this.background_music.play();
+    }
   }
 
   // checkIfBossSeePepe() {
@@ -105,11 +108,9 @@ class World {
       this.throwableObject.forEach((bottle) => {
         if (enemy.isColliding(bottle)) {
           enemy.chickenHit();
-
           setTimeout(() => {
             // this.level.enemies.splice(i, 1);
           }, 500);
-          console.log("Height of Bottle", this.level.enemies[i].chickenEnergy);
         }
       });
     });
@@ -214,20 +215,27 @@ class World {
   }
 
   coinCollectSound() {
-    this.coin_collect_sound.currentTime = 0;
-    this.coin_collect_sound.playbackRate = 1.8;
-    this.coin_collect_sound.play();
+    if (audioMute == false) {
+      this.coin_collect_sound.currentTime = 0;
+      this.coin_collect_sound.playbackRate = 1.8;
+      this.coin_collect_sound.play();
+    }
   }
+
   bottleCollectSound() {
-    this.bottle_collect_sound.currentTime = 0;
-    this.bottle_collect_sound.playbackRate = 0.9;
-    this.bottle_collect_sound.play();
+    if (audioMute == false) {
+      this.bottle_collect_sound.currentTime = 0;
+      this.bottle_collect_sound.playbackRate = 0.9;
+      this.bottle_collect_sound.play();
+    }
   }
 
   chickenHitSound() {
-    this.chicken_hit_sound.currentTime = 0;
-    this.chicken_hit_sound.volume = 0.19;
-    this.chicken_hit_sound.play();
+    if (audioMute == false) {
+      this.chicken_hit_sound.currentTime = 0;
+      this.chicken_hit_sound.volume = 0.19;
+      this.chicken_hit_sound.play();
+    }
   }
 
   checkSplashorNot() {

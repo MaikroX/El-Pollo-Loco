@@ -94,12 +94,6 @@ class Character extends MovableObject {
   }
 
   animate() {
-    // this.walkAnimation();
-    // this.jumpAnimation();
-    // this.pepeNotMoving();
-    // this.hurtAnimation();
-    // this.pepeNotMoving();
-    // this.pepeIsDown();
     this.moveCharacter();
 
     let intervalId = setInterval(() => {
@@ -140,7 +134,9 @@ class Character extends MovableObject {
         this.playFootSounds();
       }
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-        this.playJumpSound();
+        if (audioMute == false) {
+          this.playJumpSound();
+        }
         this.jump();
       }
       this.world.camera_x = -this.x + 80;
@@ -149,23 +145,31 @@ class Character extends MovableObject {
 
   // play step Sound only on Ground
   playFootSounds() {
-    if (!this.isAboveGround()) {
-      this.walking_sound.play();
+    if (audioMute == false) {
+      if (!this.isAboveGround()) {
+        this.walking_sound.play();
+      }
     }
   }
 
   playJumpSound() {
-    this.jump_sound.volume = 0.4;
-    this.jump_sound.play();
+    if (audioMute == false) {
+      this.jump_sound.volume = 0.4;
+      this.jump_sound.play();
+    }
   }
 
   sleepSound() {
-    this.sleep_sound.volume = 0.3;
-    this.sleep_sound.play();
+    if (audioMute == false) {
+      this.sleep_sound.volume = 0.3;
+      this.sleep_sound.play();
+    }
   }
 
   hurtSound() {
-    this.hurt_sound.volume = 0.35;
-    this.hurt_sound.play();
+    if (audioMute == false) {
+      this.hurt_sound.volume = 0.35;
+      this.hurt_sound.play();
+    }
   }
 }

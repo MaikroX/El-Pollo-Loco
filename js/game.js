@@ -2,14 +2,19 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
-var walking_sound = new Audio("audio/walk.mp3");
-var jump_sound = new Audio("audio/jump.mp3");
+let audioMute = false;
 
-function muteAudio() {
-  world.character.walking_sound.muted = !walking_sound.muted;
-  world.character.jump_sound.muted = !world.character.jump_sound.muted;
-  // world.character.sleep_sound.muted = !world.character.sleep_sound;
-  // world.character.hurt_sound.muted = !world.character.hurt_sound.muted;
+function audioOff() {
+  document.getElementById("muteOn").classList.add("d-none");
+  document.getElementById("muteOff").classList.remove("d-none");
+  audioMute = true;
+  world.background_music.pause();
+}
+function audioOn() {
+  document.getElementById("muteOn").classList.remove("d-none");
+  document.getElementById("muteOff").classList.add("d-none");
+  audioMute = false;
+  world.background_music.play();
 }
 
 function init() {
