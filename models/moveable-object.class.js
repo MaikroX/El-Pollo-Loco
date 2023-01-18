@@ -123,7 +123,7 @@ class MovableObject extends DrawableObject {
   fallInSleep() {
     let timepassed = new Date().getTime() - this.pepeLastMove;
     timepassed = timepassed / 1000;
-    return timepassed > 2.5;
+    return timepassed > 3.0;
   }
 
   //If Chicken alive

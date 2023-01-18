@@ -26,6 +26,7 @@ function init() {
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 68) {
     keyboard.RIGHT = true;
+    console.log(world.keyboard.RIGHT);
   }
 
   if (e.keyCode == 39) {
@@ -104,3 +105,54 @@ window.addEventListener("keyup", (e) => {
     keyboard.ENTER = false;
   }
 });
+
+// For mobile Devices //
+// let moveRight = document.getElementById("moveRight");
+// moveRight.addEventListener("touchstart", (moveRight) =>{
+//   keyboard.RIGHT = true;
+// });
+
+let rightMobile = document.getElementById("moveRight");
+let leftMobile = document.getElementById("moveLeft");
+let jumpMobile = document.getElementById("jumping");
+let shottMobile = document.getElementById("shot");
+
+function moveRightFunction() {
+  rightMobile.addEventListener("touchstart", moveRightFunction);
+  keyboard.RIGHT = true;
+}
+
+function moveLeftFunction() {
+  leftMobile.addEventListener("touchstart", moveLeftFunction);
+  keyboard.LEFT = true;
+}
+
+function jumpFunction() {
+  jumpMobile.addEventListener("touchstart", jumpFunction);
+  keyboard.SPACE = true;
+}
+
+function shotFunction() {
+  shottMobile.addEventListener("touchstart", shotFunction);
+  keyboard.E = true;
+}
+
+function stopMoveRightFunction() {
+  rightMobile.addEventListener("touchend", stopMoveRightFunction);
+  keyboard.RIGHT = false;
+}
+
+function stopMoveLeftFunction() {
+  leftMobile.addEventListener("touchend", stopMoveLeftFunction);
+  keyboard.LEFT = false;
+}
+
+function stopJumpFunction() {
+  jumpMobile.addEventListener("touchend", stopJumpFunction);
+  keyboard.SPACE = false;
+}
+
+function stopShotFunction() {
+  shottMobile.addEventListener("touchend", stopShotFunction);
+  keyboard.E = false;
+}

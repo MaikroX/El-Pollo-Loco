@@ -35,7 +35,6 @@ class World {
       this.checkThrowObject();
       this.checkEndbossHit();
       // this.checkSplashorNot();
-      // this.checkIfBossSeePepe() ;
     }, 150);
     if (audioMute == false) {
       this.backgroundMusic();
@@ -48,14 +47,6 @@ class World {
       this.background_music.play();
     }
   }
-
-  // checkIfBossSeePepe() {
-  //   if (this.character.x >= 2000) {
-  //     this.character.seen = true;
-  //     this.bossWalk();
-  //   }
-  //   console.log("Hier bin ich :" + ` ` + this.character.seen);
-  // }
 
   checkCollectionBottles() {
     this.level.bottle.forEach((bottle) => {

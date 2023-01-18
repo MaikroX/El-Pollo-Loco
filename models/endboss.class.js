@@ -44,13 +44,15 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
+  boss_sound = new Audio("audio/chicken-sound.mp3");
+
   constructor() {
     super().loadImage(this.IMAGES_ALERT[0]);
     this.loadImages(this.IMAGES_ALERT);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_WALK);
-    this.x = 1000; // 2600 soll er starten
+    this.x = 2300; // 2600 soll er starten
     this.animate();
   }
 
@@ -89,6 +91,8 @@ class Endboss extends MovableObject {
   firstHitAnimation() {
     let hurtInterval = setInterval(() => {
       if (this.endBossEnergy == 100) {
+        this.boss_sound.volume = 0.5;
+        this.boss_sound.play();
         this.playAnimation(this.IMAGES_HURT);
         setTimeout(() => {
           clearInterval(hurtInterval);
