@@ -34,17 +34,8 @@ class World {
       this.coinIsCollected();
       this.checkThrowObject();
       this.checkEndbossHit();
-      // this.checkSplashorNot();
     }, 150);
     if (audioMute == false) {
-      this.backgroundMusic();
-    }
-  }
-
-  backgroundMusic() {
-    if (audioMute == false) {
-      this.background_music.volume = 0.08;
-      this.background_music.play();
     }
   }
 
@@ -56,14 +47,12 @@ class World {
         this.collectedBottle = this.collectedBottle.splice(0, 4);
         this.collectedBottle.push(bottle);
         this.bottleBar.setPercentage(this.character.bottle);
-        console.log("Collect Bottle", this.character.bottle);
       }
     });
     if (this.bottleBar.percentage == 100) {
     }
   }
 
-  //Collect the Bottle an move it off screen
   bottleIsCollected() {
     if (this.collectedBottle.length < 5) {
       for (let i = 0; i < this.level.bottle.length; i++) {
@@ -111,7 +100,6 @@ class World {
     this.throwableObject.forEach((bottle) => {
       if (this.level.enemies[7].isColliding(bottle)) {
         this.level.enemies[7].endbossHit();
-        console.log("Endboss Energy", this.level.enemies[7].endBossEnergy);
       }
     });
   }
@@ -131,7 +119,6 @@ class World {
         if (this.character.isColliding(enemy)) {
           this.character.hit();
           this.statusBar.setPercentage(this.character.energy);
-          console.log("Colission with Character", this.character.energy);
         }
       }
     });
@@ -161,7 +148,6 @@ class World {
         this.character.collectCoins();
         this.coinCollectSound();
         this.coinBar.setPercentage(this.character.coins);
-        console.log("Collect Coins", this.character.coins);
       }
     });
   }

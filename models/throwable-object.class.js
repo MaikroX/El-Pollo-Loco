@@ -1,9 +1,9 @@
 class ThrowAbleObject extends MovableObject {
   offset = {
-    top: 10,
+    top: 30,
     bottom: 10,
-    left: 10,
-    right: 10,
+    left: 30,
+    right: 30,
   };
   intervalId = [];
   splashinterval = [];
@@ -48,23 +48,19 @@ class ThrowAbleObject extends MovableObject {
 
   throw() {
     this.speedY = 10;
+    if (world.character.otherDirection == false) {
+      this.x = world.character.x + 70;
+      setInterval(() => {
+        this.x += 4.5;
+      }, 20);
+    } else {
+      this.x = world.character.x - 30;
+      setInterval(() => {
+        this.x -= 2.5;
+      }, 20);
+    }
     this.applyGravity();
-    setInterval(() => {
-      this.x += 3.5;
-    }, 20);
   }
-
-  // bottleAnimation() {
-  //   setInterval(() => {
-  //     if (!this.chickenHit()) {
-  //       this.playAnimation(this.IMAGE_BOTTLE_ROTATION);
-  //     } else if (this.y >= 350) {
-  //       this.playAnimation(this.IMAGE_BOTTLE_SPLASH);
-  //     } else if (this.chickenHit()) {
-  //       this.playAnimation(this.IMAGE_BOTTLE_SPLASH);
-  //     }
-  //   }, 90);
-  // }
 
   throwAnimation() {
     setInterval(() => {

@@ -24,7 +24,6 @@ class Chicken extends MovableObject {
     this.loadImages(this.IMAGES_DEATH);
     this.speed = 0.65 + Math.random() * 0.35;
     this.animate();
-    console.log("Die aktuellen Koordinaten sind:", this.x, this.y);
   }
 
   animate() {

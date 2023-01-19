@@ -21,7 +21,7 @@ class MovableObject extends DrawableObject {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }
-    }, 1000 / 25);
+    }, 1000 / 30);
   }
 
   isAboveGround() {
@@ -144,6 +144,7 @@ class MovableObject extends DrawableObject {
 
   jump() {
     this.speedY = 18;
+    // this.speed = 0.5;
   }
 
   jumpAfterKill() {

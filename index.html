@@ -13,6 +13,8 @@
     <script src="js/main.js"></script>
     <script src="js/template.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="models/drawable-object.class.js"></script>
     <script src="models/moveable-object.class.js"></script>
     <script src="models/character.class.js"></script>
@@ -31,27 +33,26 @@
     <script src="models/throwable-object.class.js"></script>
     <script src="models/endboss.class.js"></script>
     <script src="levels/level1.js"></script>
-    <script src="js/game.js"></script>
   </head>
 
   <body onload="init()">
-    <div class="whole-page">
-      <h1>El Pollo Loco</h1></div>
       <div class="canvas-all">
+        <h1>El Pollo Loco</h1>
         <div class="canvas-out">
+          <div>
+          <img id="moveLeft" class="left-arrow controlls  media-controls" src="./img/0_move_button/left-arrow.png" alt="move-left">
+          <img id="moveRight" class="right-arrow controlls media-controls" src="./img/0_move_button/right-arrow.png" alt="move-right">
+          <img id="jumping" class="jump controlls media-controls" src="./img/0_move_button/jump-button.png" alt="jump">
+          <img id="shoot" class="fire controlls media-controls" src="./img/0_move_button/fire-button.png" alt="throw-bottle"> 
+          <div>
+          <img onclick="audioOff()" id="muteOn" class="controlls mute d-none" src="./img/0_move_button/sound-on.png" alt="no-mute">
+          <img onclick="audioOn()" id="muteOff" class="controlls mute"src="./img/0_move_button/sound-off.png" alt="mute">
+        </div>
+        </div>
           <canvas id="canvas" width="720" height="480"></canvas>
-          <div>
-          <img id="moveLeft" class="controlls left media-controls" src="./img/0_move_button/left-arrow.png" alt="move-left">
-          <img id="moveRight" class="controlls right media-controls" src="./img/0_move_button/right-arrow.png" alt="move-right">
-          <img id="jumping" class="controlls jump media-controls" src="./img/0_move_button/jump-button.png" alt="jump">
-          <img id="shot" class="controlls fire media-controls" src="./img/0_move_button/fire-button.png" alt="throw-bottle"> 
-          <div>
-          <img onclick="audioOff()" id="muteOn" class="controlls mute" src="./img/0_move_button/sound-on.png" alt="no-mute">
-          <img onclick="audioOn()" id="muteOff" class="controlls mute d-none" src="./img/0_move_button/sound-off.png" alt="mute">
-        </div>
-        </div>
         </div>
       </div>
     </div>
+    <script src="js/game.js"></script>
   </body>
 </html>

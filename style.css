@@ -8,7 +8,11 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-color: black;
-  height: 100vh;
+}
+
+@font-face {
+  font-family: BaksoSapi;
+  src: url("./fonts/BaksoSapi.woff");
 }
 
 .d-none {
@@ -18,15 +22,16 @@ body {
 h1 {
   color: white;
   font-family: BaksoSapi, Helvetica, sans-serif;
-  font-size: 60px;
-  margin-bottom: -32px;
+  margin-top: -64px;
+  font-size: 8vw;
 }
 
 .canvas-all {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80%;
+  height: 100vh;
 }
 
 .canvas-out {
@@ -39,23 +44,26 @@ h1 {
   border-radius: 16px;
 }
 
-#canvas {
-  width: 100%;
+canvas {
+  display: block;
+  /* width: 100%; */
   border-radius: 12px;
 }
 
 .controlls {
   position: absolute;
   transform: translate(-50%, -50%);
+  max-width: 50px;
+  padding: 8px;
 }
 
-.left {
+.left-arrow {
   width: 6vw;
   top: 91%;
   left: 6%;
 }
 
-.right {
+.right-arrow {
   width: 6vw;
   top: 91%;
   left: 14%;
@@ -77,4 +85,9 @@ h1 {
   width: 2.7vw;
   top: 4%;
   left: 98%;
+  max-width: 28px;
+}
+
+.filter-toggle {
+  filter: opacity(0.8);
 }
