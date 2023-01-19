@@ -1,7 +1,13 @@
-@media (min-width: 1000px) {
-  /* .media-controls {
-    display: none;
-  } */
+@media (min-width: 1220px) {
+  h1 {
+    margin-bottom: 0px !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .moving-keys {
+    width: 100%;
+  }
 }
 
 @media only screen and (max-width: 720px) {
@@ -11,6 +17,18 @@
 
   h1 {
     text-align: center;
+  }
+}
+
+@media only screen and (max-width: 740px) {
+  .moving-keys {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .moving-keys {
+    display: none;
   }
 }
 
@@ -28,11 +46,28 @@
   h1 {
     display: none;
   }
+
   .canvas-out {
     border: none;
   }
 
   .right-arrow {
     margin-left: 8px;
+  }
+
+  .mute {
+    bottom: -4%;
+  }
+}
+
+@media only screen and (max-height: 670px) {
+  .moving-keys {
+    display: none;
+  }
+}
+
+@media only screen and (max-height: 540px) {
+  h1 {
+    font-size: 6vw;
   }
 }

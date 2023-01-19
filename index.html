@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Pollo Loco</title>
 
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="media.css" />
 
     <script src="js/data.js"></script>
@@ -36,20 +36,73 @@
   </head>
 
   <body onload="init()">
-      <div class="canvas-all">
-        <h1>El Pollo Loco</h1>
-        <div class="canvas-out">
+    <div class="canvas-all">
+      <h1>El Pollo Loco</h1>
+      <div class="canvas-out">
+        <div>
+          <img
+            id="moveLeft"
+            class="left-arrow controlls media-controls"
+            src="./img/0_move_button/left-arrow.png"
+            alt="move-left"
+          />
+          <img
+            id="moveRight"
+            class="right-arrow controlls media-controls"
+            src="./img/0_move_button/right-arrow.png"
+            alt="move-right"
+          />
+          <img
+            id="jumping"
+            class="jump controlls media-controls"
+            src="./img/0_move_button/jump-button.png"
+            alt="jump"
+          />
+          <img
+            id="shoot"
+            class="fire controlls media-controls"
+            src="./img/0_move_button/fire-button.png"
+            alt="throw-bottle"
+          />
           <div>
-          <img id="moveLeft" class="left-arrow controlls  media-controls" src="./img/0_move_button/left-arrow.png" alt="move-left">
-          <img id="moveRight" class="right-arrow controlls media-controls" src="./img/0_move_button/right-arrow.png" alt="move-right">
-          <img id="jumping" class="jump controlls media-controls" src="./img/0_move_button/jump-button.png" alt="jump">
-          <img id="shoot" class="fire controlls media-controls" src="./img/0_move_button/fire-button.png" alt="throw-bottle"> 
+            <img
+              onclick="audioOff()"
+              id="muteOn"
+              class="controlls mute d-none"
+              src="./img/0_move_button/sound-on.png"
+              alt="no-mute"
+            />
+            <img
+              onclick="audioOn()"
+              id="muteOff"
+              class="controlls mute"
+              src="./img/0_move_button/sound-off.png"
+              alt="mute"
+            />
+          </div>
+        </div>
+        <canvas id="canvas" width="720" height="480"></canvas>
+      </div>
+      <div class="moving-keys">
+        <div class="left-right">
           <div>
-          <img onclick="audioOff()" id="muteOn" class="controlls mute d-none" src="./img/0_move_button/sound-on.png" alt="no-mute">
-          <img onclick="audioOn()" id="muteOff" class="controlls mute"src="./img/0_move_button/sound-off.png" alt="mute">
+            LEFT moving : <span class="color-key">A</span> or
+            <span class="color-key">Left</span> Key
+          </div>
+          <div>
+            RIGHT moving : <span class="color-key">D</span> or
+            <span class="color-key">Right</span> Key
+          </div>
         </div>
-        </div>
-          <canvas id="canvas" width="720" height="480"></canvas>
+        <div>
+          <div class="jump-shoot">
+            JUMP : <span class="color-key">SPACE</span> or
+            <span class="color-key">Up</span> Key
+          </div>
+          <div>
+            SHOOT : <span class="color-key">E</span> or
+            <span class="color-key">ENTER </span>Key
+          </div>
         </div>
       </div>
     </div>
