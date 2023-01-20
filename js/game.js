@@ -1,6 +1,8 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let winGame = false;
+let looseGame = false;
 
 let audioMute = true;
 
@@ -30,7 +32,7 @@ function init() {
   world = new World(canvas, keyboard);
   setTimeout(() => {
     document.getElementById("movingKeys").classList.add("display-hidden");
-  }, 8000);
+  }, 12000);
 }
 
 $(document).ready(function () {
@@ -43,3 +45,41 @@ $(document).ready(function () {
     });
   }
 });
+
+function playGame() {
+  document.getElementById("canvasContain").classList.remove("d-none");
+  document.getElementById("headlineOne").classList.add("d-none");
+  document.getElementById("playGame").classList.add("d-none");
+  document.getElementById("movingKeys").classList.remove("display-hidden");
+  init();
+  audioOn();
+}
+
+function showInstruction() {
+  document.getElementById("headlineOne").classList.add("d-none");
+  document.getElementById("targetOfGame").classList.remove("d-none");
+}
+
+function backFromHelp() {
+  document.getElementById("headlineOne").classList.remove("d-none");
+  document.getElementById("targetOfGame").classList.add("d-none");
+}
+// function showInformations() {
+//   document.getElementById("targetOfGame").classList.add("display-visible");
+//   document.getElementById("movingKeys").classList.add("display-visible");
+// }
+
+function reloadAll() {
+  window.location.reload();
+}
+
+function endIfDead() {
+  if (looseGame) {
+    document.getElementById("headlineOne").classList.remove("d-none");
+    document.getElementById("canvasContain").classList.add("d-none");
+    document.getElementById("looseGame").classList.remove("d-none");
+    document.getElementById("information").classList.add("d-none");
+    document.getElementById("movingKeys").classList.add("d-none");
+    audioOff();
+  }
+}

@@ -102,7 +102,11 @@ class Character extends MovableObject {
         this.playAnimation(this.IMAGES_DEAD);
         setTimeout(() => {
           clearInterval(intervalId);
-        }, 1050);
+        }, 2000);
+        setTimeout(() => {
+          looseGame = true;
+          endIfDead();
+        }, 1500);
       } else if (this.isHurt()) {
         this.hurtSound();
         this.playAnimation(this.IMAGES_HURT);

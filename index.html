@@ -35,10 +35,61 @@
     <script src="levels/level1.js"></script>
   </head>
 
-  <body onload="init()">
+  <body>
     <div class="canvas-all">
-      <h1>El Pollo Loco</h1>
-      <div class="canvas-out">
+      <div id="headlineOne" class="first-headline">
+        <h1>El Pollo Loco</h1>
+
+        <div id="winGame" class="d-none">
+          <h3>CongratulationS! You Win!</h3>
+          <div class="flex-column">
+            <span class="play-again play-button" onclick="playGame()"
+              >Play again</span
+            >
+            <span
+              class="play-again play-button"
+              id="backToMenu"
+              onclick="reloadAll()"
+              >Back to Menu</span
+            >
+          </div>
+        </div>
+
+        <div id="looseGame" class="d-none">
+          <h3>Oh noooo... Try again!</h3>
+          <div class="flex-column">
+            <span class="play-again play-button" onclick="playGame()"
+              >Play again</span
+            >
+            <span
+              class="play-again play-button"
+              id="backToMenu"
+              onclick="reloadAll()"
+              >Back to Menu</span
+            >
+          </div>
+        </div>
+
+        <div>
+          <span id="playGame" class="play-button" onclick="playGame()"
+            >Play game</span
+          >
+        </div>
+        <div>
+          <span id="information" class="play-button" onclick="showInstruction()"
+            >Help Pepe</span
+          >
+        </div>
+      </div>
+      <h2 id="targetOfGame" class="d-none">
+        The little mexican Pepe wants to get his lovely farm back, "El pollo
+        loco" aka the crazy chicken has taken over. <br />
+        Help Pepe to get it back and beat the boss!
+        <br />
+        <br />
+        <span id="back" onclick="backFromHelp()">back</span>
+      </h2>
+      <div class="canvas-out d-none" id="canvasContain">
         <div>
           <img
             id="moveLeft"
@@ -68,7 +119,7 @@
             <img
               onclick="audioOff()"
               id="muteOn"
-              class="controlls mute d-none"
+              class="controlls mute"
               src="./img/0_move_button/sound-on.png"
               alt="no-mute"
             />
@@ -83,7 +134,8 @@
         </div>
         <canvas id="canvas" width="720" height="480"></canvas>
       </div>
-      <div id="movingKeys" class="moving-keys">
+
+      <div id="movingKeys" class="moving-keys display-hidden">
         <div class="left-right">
           <div>
             LEFT moving : <span class="color-key">A</span> or

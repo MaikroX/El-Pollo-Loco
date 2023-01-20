@@ -83,6 +83,7 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_DEAD);
         setTimeout(() => {
           clearInterval(hurtInterval);
+          looseGame = true;
         }, 1050);
       }
     }, 250);
@@ -91,9 +92,11 @@ class Endboss extends MovableObject {
   firstHitAnimation() {
     let hurtInterval = setInterval(() => {
       if (this.endBossEnergy == 100) {
-        this.boss_sound.volume = 0.5;
-        this.boss_sound.play();
         this.playAnimation(this.IMAGES_HURT);
+        if (audioMute == false) {
+          this.boss_sound.volume = 0.5;
+          this.boss_sound.play();
+        }
         setTimeout(() => {
           clearInterval(hurtInterval);
         }, 700);

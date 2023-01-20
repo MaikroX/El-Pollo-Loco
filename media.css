@@ -1,8 +1,8 @@
-@media (min-width: 1220px) {
+/* @media (min-width: 1220px) {
   h1 {
     margin-bottom: 0px !important;
   }
-}
+} */
 
 @media (max-width: 1000px) {
   .moving-keys {
@@ -43,9 +43,9 @@
     border-radius: 0px;
   }
 
-  h1 {
+  /* h1 {
     display: none;
-  }
+  } */
 
   .canvas-out {
     border: none;
