@@ -28,6 +28,9 @@ function audioOn() {
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
+  setTimeout(() => {
+    document.getElementById("movingKeys").classList.add("display-hidden");
+  }, 8000);
 }
 
 $(document).ready(function () {

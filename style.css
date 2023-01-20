@@ -18,7 +18,7 @@ body {
 }
 
 .d-none {
-  display: none;
+  display: none !important;
 }
 
 h1 {
@@ -111,4 +111,8 @@ canvas {
 .color-key {
   font-size: 1.4em;
   color: #70bfd9;
+}
+
+.display-hidden {
+  visibility: hidden !important;
 }
