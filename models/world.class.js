@@ -25,6 +25,9 @@ class World {
     this.run();
   }
 
+  /**
+   * run all important functions they check in intervals if somethings happens ingame
+   */
   run() {
     setInterval(() => {
       this.checkFromWhereColiding();
@@ -39,6 +42,9 @@ class World {
     }
   }
 
+  /**
+   * check if the bottle on ground can collect, when the character does not have the max pieces of bottles
+   */
   checkCollectionBottles() {
     this.level.bottle.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
@@ -53,6 +59,9 @@ class World {
     }
   }
 
+  /**
+   * check if the bottle on ground is collected, plays the bottleCollectSound and splice it from array and screen
+   */
   bottleIsCollected() {
     if (this.collectedBottle.length < 5) {
       for (let i = 0; i < this.level.bottle.length; i++) {
@@ -65,7 +74,9 @@ class World {
     }
   }
 
-  // When bottle count is over 0 then able to throw a bottle
+  /**
+   * when bottle count is over 0 then able to throw a bottle
+   */
   checkThrowObject() {
     if (
       (this.keyboard.ENTER && this.collectedBottle.length > 0) ||
@@ -83,6 +94,9 @@ class World {
     }
   }
 
+  /**
+   * check if the bottle hits an enemy
+   */
   checkBottleHit() {
     this.level.enemies.forEach((enemy, i) => {
       this.throwableObject.forEach((bottle) => {
@@ -96,6 +110,9 @@ class World {
     });
   }
 
+  /**
+   * check if the bottle hits the endboss
+   */
   checkEndbossHit() {
     this.throwableObject.forEach((bottle) => {
       if (this.level.enemies[7].isColliding(bottle)) {
@@ -104,6 +121,9 @@ class World {
     });
   }
 
+  /**
+   * check if the enemy hits in front/back or from top
+   */
   checkFromWhereColiding() {
     if (this.character.isAboveGround()) {
       this.hitChickenfromTop();
@@ -112,7 +132,9 @@ class World {
     }
   }
 
-  // check collision with enemy
+  /**
+   * check collision with enemy whos still alive
+   */
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (enemy.chickenEnergy == 50) {
@@ -124,6 +146,9 @@ class World {
     });
   }
 
+  /**
+   * if hit the enemy from top, the character dont loose energy, so only the chicken does
+   */
   hitChickenfromTop() {
     this.level.enemies.forEach((enemies) => {
       if (
@@ -134,14 +159,14 @@ class World {
           this.chickenHitSound();
           enemies.chickenHit();
           this.character.jumpAfterKill();
-          // setTimeout(() => {
-          //   // this.level.enemies.splice(i, 1);
-          // }, 500);
         }
       }
     });
   }
 
+  /**
+   * check if pepe collected the coin and play the coinCollectSound
+   */
   checkCollectionCoins() {
     this.level.coins.forEach((coins) => {
       if (this.character.isColliding(coins)) {
@@ -152,7 +177,9 @@ class World {
     });
   }
 
-  //Collect the Coin an move it off screen
+  /**
+   *  collect the Coin an move it off screen
+   */
   coinIsCollected() {
     for (let i = 0; i < this.level.coins.length; i++) {
       const coin = this.level.coins[i];
@@ -162,28 +189,31 @@ class World {
     }
   }
 
+  /**
+   * set the this.character.world to this
+   */
   setWorld() {
     this.character.world = this;
   }
 
+  /**
+   * draws all objects on canvas, and fixes the camera perspective
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
-    // Zeichnet Objekte auf das Canvas
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
     this.addObjectsToMap(this.throwableObject);
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.level.bottle);
-    // Zeichnet Statusbar
-    // --- Space for fixed Objects ---
-    this.ctx.translate(-this.camera_x, 0); // back
+    this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar);
     this.addToMap(this.coinBar);
     this.addToMap(this.bottleBar);
-    this.ctx.translate(this.camera_x, 0); // forwards
+    this.ctx.translate(this.camera_x, 0);
     this.ctx.translate(-this.camera_x, 0);
     let self = this;
     requestAnimationFrame(function () {
@@ -191,6 +221,9 @@ class World {
     });
   }
 
+  /**
+   * plays the coin collect sound
+   */
   coinCollectSound() {
     if (audioMute == false) {
       this.coin_collect_sound.currentTime = 0;
@@ -199,6 +232,9 @@ class World {
     }
   }
 
+  /**
+   * plays the bottle collect sound
+   */
   bottleCollectSound() {
     if (audioMute == false) {
       this.bottle_collect_sound.currentTime = 0;
@@ -207,6 +243,9 @@ class World {
     }
   }
 
+  /**
+   * play the chicken hit sound
+   */
   chickenHitSound() {
     if (audioMute == false) {
       this.chicken_hit_sound.currentTime = 0;
@@ -215,18 +254,29 @@ class World {
     }
   }
 
+  /**
+   * check if the splash cann happen or not
+   */
   checkSplashorNot() {
     setTimeout(() => {
       this.character.splash = false;
     }, 50);
   }
 
+  /**
+   * draws each object of the array
+   * @param {array} objects array of objects
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+  /**
+   * draws the object
+   * @param {object} mo movable object
+   */
   addToMap(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);

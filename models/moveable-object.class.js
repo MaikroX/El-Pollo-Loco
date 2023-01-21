@@ -15,6 +15,9 @@ class MovableObject extends DrawableObject {
   splash = false;
   pepeLastMove = 0;
 
+  /**
+   * apply that character & objects can fallen back to ground
+   */
   applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
@@ -24,6 +27,10 @@ class MovableObject extends DrawableObject {
     }, 1000 / 30);
   }
 
+  /**
+   * check if the character is on ground or on air
+   * @returns boolean
+   */
   isAboveGround() {
     if (this instanceof ThrowAbleObject) {
       return true;
@@ -32,6 +39,11 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * check if the moveable objects are colliding each other
+   * @param {object} mo moveable object
+   * @returns parameter from with, height & offsets
+   */
   isColliding(mo) {
     return (
       this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
@@ -41,6 +53,11 @@ class MovableObject extends DrawableObject {
     );
   }
 
+  /**
+   * calculate if the chicken was hit from the top
+   * @param {object} mo moveableobject
+   * @returns parameter from with, height & offsets
+   */
   isCollidingChickenTop(mo) {
     return (
       this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
