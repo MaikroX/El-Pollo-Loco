@@ -93,6 +93,9 @@ class Character extends MovableObject {
     this.animate();
   }
 
+  /**
+   * animate the character moving - hurt - dead - idle or sleeping
+   */
   animate() {
     this.moveCharacter();
 
@@ -147,7 +150,9 @@ class Character extends MovableObject {
     }, 1000 / 60);
   }
 
-  // play step Sound only on Ground
+  /**
+   * play step Sound only on Ground
+   */
   playFootSounds() {
     if (audioMute == false) {
       if (!this.isAboveGround()) {
@@ -156,6 +161,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * play jump sounds
+   */
   playJumpSound() {
     if (audioMute == false) {
       this.jump_sound.volume = 0.4;
@@ -163,6 +171,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * play sleep sounds
+   */
   sleepSound() {
     if (audioMute == false) {
       this.sleep_sound.volume = 0.3;
@@ -170,6 +181,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * play hurt sounds
+   */
   hurtSound() {
     if (audioMute == false) {
       this.hurt_sound.volume = 0.35;

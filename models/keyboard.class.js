@@ -17,6 +17,11 @@ class Keyboard {
     this.moveTouch();
   }
 
+  /**
+   * they Keyboard settings for not mobile Devices
+   * setting true at keydown
+   * setting false at keyup
+   */
   moveWithKeyboard() {
     window.addEventListener("keydown", (e) => {
       if (e.keyCode == 68) {
@@ -100,7 +105,11 @@ class Keyboard {
     });
   }
 
-  // For Mobile Devices
+  /**
+   * the settings for mobile device
+   * setting true at touchstart
+   * setting false at tochend
+   */
   moveRightArrow = document.querySelector(".right-arrow");
   moveLeftArrow = document.querySelector(".left-arrow");
   jumpButton = document.querySelector(".jump");

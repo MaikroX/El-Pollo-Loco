@@ -38,6 +38,9 @@ class ThrowAbleObject extends MovableObject {
     this.animate();
   }
 
+  /**
+   * animate the throwing bottles
+   */
   animate() {
     this.throw();
     this.splashBottle();
@@ -46,6 +49,9 @@ class ThrowAbleObject extends MovableObject {
     // this.bottleAnimation();
   }
 
+  /**
+   * draw the throwing bottle at start throwing and check in wich direction the bottle fly
+   */
   throw() {
     this.speedY = 10;
     if (world.character.otherDirection == false) {
@@ -62,6 +68,9 @@ class ThrowAbleObject extends MovableObject {
     this.applyGravity();
   }
 
+  /**
+   * animates the img of the bottle rotation
+   */
   throwAnimation() {
     setInterval(() => {
       this.throwBottleSound();
@@ -69,6 +78,9 @@ class ThrowAbleObject extends MovableObject {
     }, 60);
   }
 
+  /**
+   * animates the bottle splash when its on ground or hit enemies
+   */
   splashBottle() {
     this.splashinterval = setInterval(() => {
       if (this.y >= 300) {
@@ -87,6 +99,9 @@ class ThrowAbleObject extends MovableObject {
     }, 60);
   }
 
+  /**
+   * play the bottlesplash sound
+   */
   soundSplash() {
     if (audioMute == false) {
       this.splash_sound.volume = 0.5;
@@ -98,6 +113,9 @@ class ThrowAbleObject extends MovableObject {
     }, 900);
   }
 
+  /**
+   * play the throwBottle sound
+   */
   throwBottleSound() {
     if (audioMute == false) {
       this.bottle_throw.volume = 0.3;

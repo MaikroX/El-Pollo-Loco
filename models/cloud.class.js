@@ -9,6 +9,9 @@ class Cloud extends MovableObject {
     this.animate();
   } // Zahl zwischen 200 und 700
 
+  /**
+   * animate the clouds moving
+   */
   animate() {
     this.moveLeft();
   }

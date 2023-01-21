@@ -56,6 +56,9 @@ class Endboss extends MovableObject {
     this.animate();
   }
 
+  /**
+   * animate the endboss actions
+   */
   animate() {
     this.bossWalkAnimation();
     this.firstHitAnimation();
@@ -63,14 +66,9 @@ class Endboss extends MovableObject {
     this.bossMove();
   }
 
-  bossMove() {
-    setInterval(() => {
-      if (this.endBossEnergy <= 101 && this.endBossEnergy >= 1) {
-        this.bossWalk();
-      }
-    }, 1000 / 60);
-  }
-
+  /**
+   * animate in intervals when the boss get some action
+   */
   bossWalkAnimation() {
     let hurtInterval = setInterval(() => {
       if (this.endBossEnergy <= 101 && this.endBossEnergy >= 1) {
@@ -90,6 +88,20 @@ class Endboss extends MovableObject {
     }, 250);
   }
 
+  /**
+   * the boss is walking when the endBossEnergy ist less then 101
+   */
+  bossMove() {
+    setInterval(() => {
+      if (this.endBossEnergy <= 101 && this.endBossEnergy >= 1) {
+        this.bossWalk();
+      }
+    }, 1000 / 60);
+  }
+
+  /**
+   * when the boss hits first time hurtAnimation
+   */
   firstHitAnimation() {
     let hurtInterval = setInterval(() => {
       if (this.endBossEnergy == 100) {
@@ -105,6 +117,9 @@ class Endboss extends MovableObject {
     }, 150);
   }
 
+  /**
+   * when the boss hits second time hurtAnimation
+   */
   secondHitAnimation() {
     let hurtInterval = setInterval(() => {
       if (this.endBossEnergy == 50) {

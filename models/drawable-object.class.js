@@ -7,11 +7,18 @@ class DrawableObject {
   imageCache = {};
   currentImage = 0;
 
+  /**
+   * drwas the img that are set
+   * @param {object} ctx
+   */
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
-  // Rahmen um die Objekte
+  /**
+   * draws a border / for checking the hitboxes of the current img
+   * @param {number} ctx
+   */
   drawFrame(ctx) {
     if (
       this instanceof Character ||
@@ -29,6 +36,10 @@ class DrawableObject {
     }
   }
 
+  /**
+   * load the array from the img
+   * @param {array} arr array of images
+   */
   loadImages(arr) {
     arr.forEach((path) => {
       let img = new Image();
@@ -37,6 +48,10 @@ class DrawableObject {
     });
   }
 
+  /**
+   * load images by its relative path
+   * @param {string} path path the relative path to the img
+   */
   loadImage(path) {
     this.img = new Image(); // this.img = document.getElementbyId('image') <img id="image" src>
     this.img.src = path;

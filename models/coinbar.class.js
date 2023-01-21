@@ -21,13 +21,20 @@ class Coinbar extends DrawableObject {
     this.height = 60;
     this.setPercentage(0);
   }
-
+  /**
+   * show the correct img from the statusbar, of its length
+   * @param {number} percentage
+   */
   setPercentage(percentage) {
     this.percentage = percentage;
     let path = this.IMAGES_COINS[this.resolveImgIndex()];
     this.img = this.imageCache[path];
   }
 
+  /**
+   * returns the percentage for animate the correct statusbar length onscreen
+   * @returns {number} to get the percentage
+   */
   resolveImgIndex() {
     if (this.percentage == 100) {
       return 5;
