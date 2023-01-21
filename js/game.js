@@ -70,14 +70,27 @@ function backFromHelp() {
 // }
 
 function reloadAll() {
-  window.location.reload();
+  return new Promise((resolve) => {
+    window.location.reload();
+    resolve();
+  });
 }
 
 function endIfDead() {
   if (looseGame) {
     document.getElementById("headlineOne").classList.remove("d-none");
-    document.getElementById("canvasContain").classList.add("d-none");
     document.getElementById("looseGame").classList.remove("d-none");
+    document.getElementById("canvasContain").classList.add("d-none");
+    document.getElementById("information").classList.add("d-none");
+    document.getElementById("movingKeys").classList.add("d-none");
+    audioOff();
+  }
+}
+function endIfWin() {
+  if (winGame) {
+    document.getElementById("headlineOne").classList.remove("d-none");
+    document.getElementById("winGame").classList.remove("d-none");
+    document.getElementById("canvasContain").classList.add("d-none");
     document.getElementById("information").classList.add("d-none");
     document.getElementById("movingKeys").classList.add("d-none");
     audioOff();

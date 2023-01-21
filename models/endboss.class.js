@@ -58,10 +58,8 @@ class Endboss extends MovableObject {
 
   animate() {
     this.bossWalkAnimation();
-    // this.alertAnimation();
     this.firstHitAnimation();
     this.secondHitAnimation();
-    // this.deadAnimation();
     this.bossMove();
   }
 
@@ -83,8 +81,11 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_DEAD);
         setTimeout(() => {
           clearInterval(hurtInterval);
-          looseGame = true;
         }, 1050);
+        setTimeout(() => {
+          winGame = true;
+          endIfWin();
+        }, 1500);
       }
     }, 250);
   }
@@ -113,17 +114,5 @@ class Endboss extends MovableObject {
         }, 700);
       }
     }, 150);
-  }
-
-  deadAnimation() {
-    let hurtInterval = setInterval(() => {
-      if (this.endBossEnergy == 0) {
-        this.speed = 0;
-        this.playAnimation(this.IMAGES_DEAD);
-        setTimeout(() => {
-          clearInterval(hurtInterval);
-        }, 1050);
-      }
-    }, 250);
   }
 }
