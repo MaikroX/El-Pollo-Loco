@@ -98,9 +98,11 @@ class Character extends MovableObject {
    */
   animate() {
     this.moveCharacter();
+    this.actionsCharacter();
+  }
 
+  actionsCharacter() {
     let intervalId = setInterval(() => {
-      //walk Animation
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
         setTimeout(() => {
@@ -111,7 +113,9 @@ class Character extends MovableObject {
           endIfDead();
         }, 1500);
       } else if (this.isHurt()) {
-        this.hurtSound();
+        if (winGame == false) {
+          this.hurtSound();
+        }
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.isAboveGround()) {
         this.getMoveTimeStamp();
@@ -121,7 +125,9 @@ class Character extends MovableObject {
         this.playAnimation(this.IMAGES_WALKING);
       } else if (this.fallInSleep() && !this.isAboveGround()) {
         this.playAnimation(this.IMAGES_LONG_IDLE);
-        this.sleepSound();
+        if (winGame == false) {
+          this.sleepSound();
+        }
       } else {
         this.playAnimation(this.IMAGES_IDLE);
       }
@@ -131,7 +137,6 @@ class Character extends MovableObject {
   moveCharacter() {
     setInterval(() => {
       this.walking_sound.pause();
-      // this.jump_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
         this.playFootSounds();

@@ -45,8 +45,6 @@ class ThrowAbleObject extends MovableObject {
     this.throw();
     this.splashBottle();
     this.throwBottleSound();
-    // this.throwAnimation();
-    // this.bottleAnimation();
   }
 
   /**
@@ -87,7 +85,6 @@ class ThrowAbleObject extends MovableObject {
         this.playAnimation(this.IMAGE_BOTTLE_SPLASH);
         this.soundSplash();
       } else if (world.character.splash == true) {
-        // Andere Abfrage der condition wann true wann false
         this.playAnimation(this.IMAGE_BOTTLE_SPLASH);
         this.soundSplash();
         setTimeout(() => {

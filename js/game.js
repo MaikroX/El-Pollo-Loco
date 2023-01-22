@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let winGame = false;
 let looseGame = false;
+let gameEndSound = false;
 
 let audioMute = true;
 
@@ -27,6 +28,9 @@ function audioOn() {
   world.background_music.play();
 }
 
+/**
+ * init the canvas and set the new world
+ */
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
@@ -35,6 +39,9 @@ function init() {
   }, 12000);
 }
 
+/**
+ * for mobile screens to hide the browser bar onscroll to have a better UX
+ */
 $(document).ready(function () {
   if (!window.navigator.standalone) {
     $("a").click(function () {
@@ -46,6 +53,9 @@ $(document).ready(function () {
   }
 });
 
+/**
+ * hides the start screen, start the game and actually default audio ON
+ */
 function playGame() {
   document.getElementById("canvasContain").classList.remove("d-none");
   document.getElementById("headlineOne").classList.add("d-none");
@@ -53,22 +63,28 @@ function playGame() {
   document.getElementById("movingKeys").classList.remove("display-hidden");
   init();
   audioOn();
+  gameEndSound = false;
 }
 
+/**
+ * shows the little story of Pepe
+ */
 function showInstruction() {
   document.getElementById("headlineOne").classList.add("d-none");
   document.getElementById("targetOfGame").classList.remove("d-none");
 }
 
+/**
+ * load the start screen when get back brom help
+ */
 function backFromHelp() {
-  document.getElementById("headlineOne").classList.remove("d-none");
-  document.getElementById("targetOfGame").classList.add("d-none");
+  reloadAll();
 }
-// function showInformations() {
-//   document.getElementById("targetOfGame").classList.add("display-visible");
-//   document.getElementById("movingKeys").classList.add("display-visible");
-// }
 
+/**
+ * loads the whole window & refresh all
+ * @returns promise
+ */
 function reloadAll() {
   return new Promise((resolve) => {
     window.location.reload();
@@ -76,6 +92,7 @@ function reloadAll() {
   });
 }
 
+/** when gameOver by DEAD the dead message shown and the gameover sound is playing if audioMute = false  */
 function endIfDead() {
   if (looseGame) {
     document.getElementById("headlineOne").classList.remove("d-none");
@@ -83,9 +100,19 @@ function endIfDead() {
     document.getElementById("canvasContain").classList.add("d-none");
     document.getElementById("information").classList.add("d-none");
     document.getElementById("movingKeys").classList.add("d-none");
-    audioOff();
+    if (audioMute == false) {
+      world.looseGameSound.currentTime = 0;
+      world.looseGameSound.volume = 0.5;
+      world.looseGameSound.play();
+      world.background_music.pause();
+    }
   }
 }
+
+/**
+ * when gameOver by WIN the win message shown and the gamewin sound is playing if audioMute = false
+ * all other sounds stop, if there are any chicken alive
+ */
 function endIfWin() {
   if (winGame) {
     document.getElementById("headlineOne").classList.remove("d-none");
@@ -93,6 +120,14 @@ function endIfWin() {
     document.getElementById("canvasContain").classList.add("d-none");
     document.getElementById("information").classList.add("d-none");
     document.getElementById("movingKeys").classList.add("d-none");
-    audioOff();
+    world.character.energy = 1000;
+    if (audioMute == false) {
+      winGame = true;
+      world.winGameSound.volume = 0.5;
+      world.winGameSound.play();
+      world.background_music.pause();
+      world.character.sleep_sound.pause();
+      world.character.hurt_sound.pause();
+    }
   }
 }

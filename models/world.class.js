@@ -15,6 +15,8 @@ class World {
   coin_collect_sound = new Audio("audio/coin-collect.mp3");
   bottle_collect_sound = new Audio("audio/collect-bottle.mp3");
   chicken_hit_sound = new Audio("audio/chicken-hit.mp3");
+  winGameSound = new Audio("audio/gamewin-sound.mp3");
+  looseGameSound = new Audio("audio/gameover-sound.mp3");
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -102,9 +104,6 @@ class World {
       this.throwableObject.forEach((bottle) => {
         if (enemy.isColliding(bottle)) {
           enemy.chickenHit();
-          setTimeout(() => {
-            // this.level.enemies.splice(i, 1);
-          }, 500);
         }
       });
     });
@@ -289,6 +288,10 @@ class World {
     }
   }
 
+  /**
+   * flips the images by changing the directions
+   * @param {object} mo movable object
+   */
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -296,6 +299,10 @@ class World {
     mo.x = mo.x * -1;
   }
 
+  /**
+   * flips the image back by changing the directions
+   * @param {object} mo movable object
+   */
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();
