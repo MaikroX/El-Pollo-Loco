@@ -42,16 +42,16 @@ function init() {
 /**
  * for mobile screens to hide the browser bar onscroll to have a better UX
  */
-$(document).ready(function () {
-  if (!window.navigator.standalone) {
-    $("a").click(function () {
-      window.scrollTo(0, 0);
-      setTimeout(function () {
-        window.scrollTo(0, 1);
-      }, 0);
-    });
-  }
-});
+// $(document).ready(function () {
+//   if (!window.navigator.standalone) {
+//     $("a").click(function () {
+//       window.scrollTo(0, 0);
+//       setTimeout(function () {
+//         window.scrollTo(0, 1);
+//       }, 0);
+//     });
+//   }
+// });
 
 /**
  * hides the start screen, start the game and actually default audio ON
