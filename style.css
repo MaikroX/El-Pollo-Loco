@@ -38,9 +38,11 @@ h2 {
   text-align: center;
 }
 
-h3 {
-  color: #7e2805;
-  font-size: 2.8rem;
+@media (max-width: 490px) {
+  h3 {
+    color: #7e2805;
+    font-size: 1rem;
+  }
 }
 
 .canvas-all {

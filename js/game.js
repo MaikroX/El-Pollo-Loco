@@ -4,7 +4,6 @@ let keyboard = new Keyboard();
 let winGame = false;
 let looseGame = false;
 let gameEndSound = false;
-
 let audioMute = true;
 
 /**
@@ -24,7 +23,7 @@ function audioOn() {
   document.getElementById("muteOn").classList.remove("d-none");
   document.getElementById("muteOff").classList.add("d-none");
   audioMute = false;
-  world.background_music.volume = 0.08;
+  world.background_music.volume = 0.03;
   world.background_music.play();
 }
 

@@ -114,7 +114,7 @@ class Character extends MovableObject {
         }, 1500);
       } else if (this.isHurt()) {
         if (winGame == false) {
-          this.hurtSound();
+          // this.hurtSound();
         }
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.isAboveGround()) {
@@ -126,7 +126,7 @@ class Character extends MovableObject {
       } else if (this.fallInSleep() && !this.isAboveGround()) {
         this.playAnimation(this.IMAGES_LONG_IDLE);
         if (winGame == false) {
-          this.sleepSound();
+          // this.sleepSound();
         }
       } else {
         this.playAnimation(this.IMAGES_IDLE);
@@ -136,18 +136,22 @@ class Character extends MovableObject {
 
   moveCharacter() {
     setInterval(() => {
-      this.walking_sound.pause();
+      // this.walking_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+        if (audioMute == false) {
+          // this.playFootSounds();
+        }
         this.moveRight();
-        this.playFootSounds();
       }
       if (this.world.keyboard.LEFT && this.x > -600) {
+        if (audioMute == false) {
+          // this.playFootSounds();
+        }
         this.moveLeft();
-        this.playFootSounds();
       }
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         if (audioMute == false) {
-          this.playJumpSound();
+          // this.playJumpSound();
         }
         this.jump();
       }
